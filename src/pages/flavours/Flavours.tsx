@@ -97,6 +97,11 @@ export default function Flavours() {
     navigate(routes.summary)
   }
 
+
+  const handleCombined = () => {
+    handleNext();
+  }
+
   useEffect(() => {
     if (!pizzaFlavour) return
 

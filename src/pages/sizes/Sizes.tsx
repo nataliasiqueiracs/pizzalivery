@@ -6,6 +6,7 @@ import { Layout } from "../../components/layout/Layout"
 import { Title } from "../../components/title/Title"
 import { RadioCard, SizeActionWrapper, SizeContentWrapper } from "./Sizes.style"
 import OrderContext from "../../contexts/OrderContext"
+import Flavours from "../flavours/Flavours"
 
 export default function Sizes() {
   const navigate = useNavigate()
@@ -58,6 +59,16 @@ export default function Sizes() {
 
   const [sizeId, setSizeId] = useState("")
 
+  const [flavours, setFlavours] = useState(0)
+
+  const handleDecrement = (flavours: number) =>  {
+    if (flavours % 2 == 1) {
+    setFlavours(flavours - 1)
+    } else {
+      console.log("Ação permitida apenas na escolha de pizza com 2 sabores.")
+    }
+  }
+
   const getPizzaSize = (id: string) => {
     return sizeOptions.filter((option) => option.id === id)
   }
@@ -76,6 +87,7 @@ export default function Sizes() {
     navigate(routes.pizzaFlavour)
   }
 
+
   useEffect(() => {
     if (!pizzaSize) return
 
@@ -88,14 +100,7 @@ export default function Sizes() {
       <SizeContentWrapper>
         {sizeOptions.map(({ id, size, slices, flavours, text }) => (
           <RadioCard key={id}>
-            <input
-              type="radio"
-              id={id}
-              name="sizes"
-              onChange={handleChange}
-              value={id}
-              checked={sizeId === id}
-            />
+            <input type="radio" id={id} name="sizes" onChange={handleChange} value={id} checked={sizeId === id}/>
             <label htmlFor={id}>
               {text} - {flavours} sabores
               <span>
